@@ -95,6 +95,7 @@ print.TicTacToeBoard <- function(obj, full = FALSE) {
 	  cat("Who to move: ",obj$whoToMove,"\n")
 	  cat("isGameOver: ",obj$isGameOver,"\n")
 	  cat("winner: ",obj$winner,"\n")
+	  cat("legalMoves: ",obj$legalMoves,"\n")
 	}
 }
 
@@ -130,12 +131,18 @@ playRandomGames <- function(num = 1) {
 
 unittest <- function() {
   b <- TicTacToeBoard()
-  print(b)
-  b <- makeMove(b,"A2")
-  b <- undoMove(b, "A2")
+  print("EMPTY TEST:")
   print(b, full = T)
-  b <- makeMove(b,"A2")
+  cat("\n")
+  b <- makeMove(b,"B3")
+  b <- makeMove(b,"A3")
+  print("B3 TEST:")
   print(b, full = T)
+  cat("\n")
+  b <- undoMove(b, "B3")
+  print("UNDO TEST:")
+  print(b, full = T)
+  cat("\n")
 }
 
 unittest()

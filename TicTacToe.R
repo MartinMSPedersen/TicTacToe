@@ -28,6 +28,7 @@ for (move1 in b$legalMoves) {
               next
             }
             for (move7 in b$legalMoves) {
+              cat("move7 = ",move7,", class=",class(move7),"\n")
               b <- makeMove(b, move7)
               if (b$isGameOver) {
                 print(b, full = T)
