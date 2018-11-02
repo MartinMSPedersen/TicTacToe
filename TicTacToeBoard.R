@@ -28,7 +28,8 @@ undoMove.TicTacToeBoard <- function(obj, move) {
     obj$whoToMove <- "X"
   }
   obj$legalMoves <- append(obj$legalMoves, move)
-  obj <- isGameOver(obj)
+  #obj <- isGameOver(obj)
+  obj$isGameOver <- FALSE
   obj
 }
 
