@@ -7,7 +7,7 @@ TicTacToeBoard <- function() {
 		      isGameOver = FALSE, 
 		      winner = NA,
 		      board = rep("-",9),
-		      legalMoves = c("A1","B1","C1","A2","B2","C2","A3","B3","C3"),
+		      legalMoves = c("A1","A2","A3","B1","B2","B3","C1","C2","C3"),
 		      moves <- list()
 		     )
 	attr(value, "class") <- "TicTacToeBoard"
@@ -33,7 +33,7 @@ undoMove.TicTacToeBoard <- function(obj, move) {
 }
 
 isGameOver.TicTacToeBoard <- function(obj) {
-	if (obj$isGameOver) { return(obj$winner) }
+	if (obj$isGameOver) { return(obj) }
 	if (length(obj$legalMoves) == 0) {
 		obj$isGameOver <- TRUE
 		obj$winner <- "-"
@@ -145,5 +145,4 @@ unittest <- function() {
   cat("\n")
 }
 
-unittest()
 
