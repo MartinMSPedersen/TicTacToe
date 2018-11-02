@@ -1,6 +1,7 @@
 makeMove <- function(obj, move) { UseMethod("makeMove") }
 isGameOver <- function(obj) { UseMethod("isGameOver") }
 undoMove <- function(obj, move) { UseMethod("undoMove") }
+getPosition <- function(obj) { UseMethod("getPosition") }
 
 TicTacToeBoard <- function() {
 	value <- list(whoToMove = "X", 
@@ -12,6 +13,14 @@ TicTacToeBoard <- function() {
 		     )
 	attr(value, "class") <- "TicTacToeBoard"
 	value
+}
+
+getPosition.TicTacToeBoard <- function(obj) {
+	result <- paste0(obj$board,collapse="")
+	result <- gsub("-","001",result,fixed = TRUE)
+	result <- gsub("X","010",result,fixed = TRUE)
+	result <- gsub("O","100",result,fixed = TRUE)
+	result
 }
 
 undoMove.TicTacToeBoard <- function(obj, move) {
