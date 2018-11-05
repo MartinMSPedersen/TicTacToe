@@ -24,6 +24,35 @@ makeAllGames <- function(output = FALSE) {
 	result[nchar(result) != 0]
 }
 
+makeAllBoards <- function(output = FALSE) {
+	b <- TicTacToeBoard()
+	idx <- 1
+	result <- vector(mode = "list", length = 5478)
+        result[[idx]] <- TicTacToeBoard()
+	idx <- idx + 1
+
+	placeOne <- function(b) {
+		for (move in b$legalMoves) {
+			b <- makeMove(b, move)
+			if (output) {
+				print(b)
+			}
+			result[[idx]] <<- b
+			idx <<- idx + 1
+			if (idx %% 1000 == 0) {
+				print(idx)
+			}
+			if (!b$isGameOver) {
+				placeOne(b)
+			}
+			b <- undoMove(b, move)
+		}
+	}
+	placeOne(b)
+	result
+	#result <- unique(result)
+}
+
 makeAllPositions <- function(output = FALSE) {
 	result <- vector("character", 6e5)
 	b <- TicTacToeBoard()
@@ -52,9 +81,7 @@ makeAllPositions <- function(output = FALSE) {
 	result[nchar(result) != 0]
 }
 
-games <- makeAllGames(T)	
-positions <- makeAllPositions(T)
-	
+#games <- makeAllGames(T)	
+positions <- makeAllPositions(F)
 
-
-
+#v <- computeValues()
