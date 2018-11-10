@@ -3,7 +3,7 @@ isGameOver <- function(obj) { UseMethod("isGameOver") }
 undoMove <- function(obj, move) { UseMethod("undoMove") }
 getPosition <- function(obj) { UseMethod("getPosition") }
 
-TicTacToeBoard <- function() {
+TicTacToeBoard <- function(position = NULL) {
 	value <- list(whoToMove = "X", 
 		      isGameOver = FALSE, 
 		      winner = NA,
