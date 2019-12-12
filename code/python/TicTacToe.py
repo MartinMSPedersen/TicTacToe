@@ -5,6 +5,7 @@ class TicTacToeBoard():
     self.whoToMove = "X"
     self.is_game_over = False
     self.winner = "" 
+    self.lastMove = ""
     self.board = [[0 for x in range(3)] for y in range(3)] 
     self.emptyPlaces = [ "A1", "A2", "A3",
                         "B1", "B2", "B3",
@@ -28,6 +29,7 @@ class TicTacToeBoard():
     else:
       self.whoToMove = "X"
     self.emptyPlaces.remove(move)
+    self.lastMove = move
     return self.isGameOver()
 
   def isGameOver(self):
@@ -88,19 +90,23 @@ class TicTacToeBoard():
           return True
     return False
 
-  def undoMove(self, move):
-    row = ord(move[0:1]) - ord('A')
-    col = ord(move[1:2]) - ord('0')
-    if (self.board[row][col] == "-"):
-       return
-
+  def undoLastMove(self):
+    if (self.lastMove == ""):
+      return
+    row = ord(self.lastMove[0:1]) - ord('A')
+    col = ord(self.lastMove[1:2]) - ord('1')
     self.board[row][col] = "-"
     if (self.whoToMove == "X"):
       self.whoToMove = "O"
     else:
       self.whoToMove = "X"
-    self.emptyPlaces.append(move)
-    isGameOver(self)
+    self.emptyPlaces.append(self.lastMove)
+    self.playedMoves.remove(self.lastMove)
+    self.is_game_over = False
+    if (len(self.playedMoves) == 0): 
+      self.lastMove = ""
+    else:
+      self.lastMove = self.playedMoves[-1]
     return
 
   def print(self, full = False):
@@ -117,22 +123,16 @@ class TicTacToeBoard():
       if (self.isGameOver): 
         print("Winner: ", self.winner)
       print("Empty places: ",self.emptyPlaces)
+      print()
+# end of class TicTacTocBoard
 
-"""
-Board = TicTacToeBoard()
-Board.print()
-Board.makeMove("A1")
-Board.print()
-Board.makeMove("A3")
-Board.print()
-Board.makeMove("C3")
-Board.print()
-Board.makeMove("B2")
-Board.print()
-Board.makeMove("C1")
-Board.print()
-Board.makeMove("C2")
-Board.print()
-Board.makeMove("B1")
-Board.print(full = True)
-"""
+def generateAllGames(board):
+  for move in list(board.emptyPlaces):
+    board.makeMove(move)
+    if (board.isGameOver() == True):
+      print(board.playedMoves)
+    else:
+      generateAllGames(board)
+    board.undoLastMove()
+
+generateAllGames(TicTacToeBoard())
