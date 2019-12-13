@@ -6,14 +6,11 @@ class TicTacToeBoard():
     self.is_game_over = False
     self.winner = "" 
     self.lastMove = ""
-    self.board = [[0 for x in range(3)] for y in range(3)] 
+    self.board = [['-' for x in range(3)] for y in range(3)] 
     self.emptyPlaces = [ "A1", "A2", "A3",
                         "B1", "B2", "B3",
                         "C1", "C2", "C3" ]
     self.playedMoves = []
-    for i in range(len(self.board)):
-      for j in range(len(self.board[i])):
-        self.board[i][j] = "-"
 
   def makeMove(self, move):
     if (self.is_game_over):
@@ -35,7 +32,6 @@ class TicTacToeBoard():
   def isGameOver(self):
     if (self.is_game_over == True):
       return True
-
     if (len(self.emptyPlaces) == 0):
       self.is_game_over == True
       self.winner = "-"
@@ -107,7 +103,6 @@ class TicTacToeBoard():
       self.lastMove = ""
     else:
       self.lastMove = self.playedMoves[-1]
-    return
 
   def print(self, full = False):
     print("A ","".join(self.board[0]))
