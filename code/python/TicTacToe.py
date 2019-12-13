@@ -15,11 +15,11 @@ class TicTacToeBoard():
   def makeMove(self, move):
     if (self.is_game_over):
       return False
-    self.playedMoves.append(move)
     row = ord(move[0:1]) - ord('A')
     col = ord(move[1:2]) - ord('1')
     if (self.board[row][col] != "-"):
        return False
+    self.playedMoves.append(move)
     self.board[row][col] = self.whoToMove
     if (self.whoToMove == "X"):
       self.whoToMove = "O"
