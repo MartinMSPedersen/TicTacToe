@@ -1,0 +1,14 @@
+CXXFLAGS = -Wall -Wunused -Wcast-qual -Wconversion -Woverloaded-virtual  -Wextra -Werror --pedantic-error -finline-functions
+CC = g++
+OBJS = TicTacToe.o TicTacToeBoard.o
+EXECUTABLES = TicTacToe
+
+tictactoe: $(OBJS)
+	$(CC) -o $@ $(OBJS)
+
+.c.o:
+	$(CC) -c $<
+
+clean:
+	rm -f $(EXECUTABLES) $(OBJS) 
+
