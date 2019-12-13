@@ -1,4 +1,4 @@
-CXXFLAGS = -Wall -Wunused -Wcast-qual -Wconversion -Woverloaded-virtual  -Wextra -Werror --pedantic-error -finline-functions
+CXXFLAGS = -Wall -Wunused -Wcast-qual -Wconversion -Woverloaded-virtual  -Wextra -Werror --pedantic-error -finline-functions -ansi
 CC = g++
 OBJS = TicTacToe.o TicTacToeBoard.o 
 EXECUTABLES = TicTacToe

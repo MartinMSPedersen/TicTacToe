@@ -2,9 +2,10 @@
 #include <cstdlib>
 #include <iostream>
 
-int main() {
+int main() 
+{
 	TicTacToeBoard t;
 
 	cout << t << endl;
-	return EXIT_SUCCESS;
+	return(EXIT_SUCCESS);
 }
