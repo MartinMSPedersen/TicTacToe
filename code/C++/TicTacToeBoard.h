@@ -15,14 +15,16 @@ class TicTacToeBoard
 		bool makeMove(string move);
 		bool isGameOver();
 		void undoLastMove();
-		list<string> emptyPlaces;
-		list<string> playedMoves;
+		list<string> legalMoves() const;
+		list<string> playedMoves();
 	private:
 		char whoToMove;
 		bool is_game_over;
 		char winner;
 		string lastMove;
 		char board[3][3];
+		list<string> emptyPlaces;
+		list<string> _playedMoves;
 };
 
 #endif

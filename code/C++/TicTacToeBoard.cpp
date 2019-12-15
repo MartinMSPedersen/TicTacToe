@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iterator>
 #include <cstring>
+#include <algorithm> 
 
 using namespace std;
 
@@ -31,19 +32,23 @@ ostream& operator<< (ostream& o, TicTacToeBoard& tb)
 {
 	string result;
 
+        result+="  123\n";
         result+="A ";
 	result+=tb.board[0][0];
 	result+=tb.board[0][1];
 	result+=tb.board[0][2];
+	result+=" A";
         result+="\nB ";
 	result+=tb.board[1][0];
 	result+=tb.board[1][1];
 	result+=tb.board[1][2];
+	result+=" B";
         result+="\nC ";
 	result+=tb.board[2][0];
 	result+=tb.board[2][1];
 	result+=tb.board[2][2];
-        result+="\n\n  123";
+	result+=" C";
+        result+="\n  123";
 	return o << result;
 }
 
@@ -124,11 +129,11 @@ void TicTacToeBoard::undoLastMove() {
     whoToMove='X';
   }
   emptyPlaces.push_back(lastMove);
-  playedMoves.remove(lastMove);
-  if (playedMoves.size()==0) {
+  _playedMoves.remove(lastMove);
+  if (_playedMoves.size()==0) {
     lastMove=' ';
   } else {
-    lastMove=*(--playedMoves.end());
+    lastMove=*(--_playedMoves.end());
   }
 }
 
@@ -137,11 +142,12 @@ bool TicTacToeBoard::makeMove(string move)
   int row;
   int col;
 
+  transform(move.begin(), move.end(), move.begin(), ::tolower); 
   if (is_game_over) return false;
   row=move.at(0)-'A';
   col=move.at(1)-'1';
   if (board[row][col] != '-') return false;
-  playedMoves.push_back(move);
+  _playedMoves.push_back(move);
   board[row][col]=whoToMove;
   if (whoToMove == 'X') {
     whoToMove='O';
@@ -151,4 +157,20 @@ bool TicTacToeBoard::makeMove(string move)
   emptyPlaces.remove(move);
   lastMove=move;
   return isGameOver();
+}
+
+list<string> TicTacToeBoard::legalMoves() const
+{
+  list<string> result;
+  list<string>::iterator it;
+
+  for (auto const& it : emptyPlaces) {
+    result.push_back(it);
+  }
+  return result;
+}
+
+list<string> TicTacToeBoard::playedMoves()
+{
+  return _playedMoves;
 }
