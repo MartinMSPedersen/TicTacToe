@@ -172,5 +172,11 @@ list<string> TicTacToeBoard::legalMoves() const
 
 list<string> TicTacToeBoard::playedMoves()
 {
-  return _playedMoves;
+  list<string> result;
+  list<string>::iterator it;
+
+  for (auto const& it : _playedMoves) {
+    result.push_back(it);
+  }
+  return result;
 }

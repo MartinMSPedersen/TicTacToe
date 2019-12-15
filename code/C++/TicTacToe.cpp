@@ -9,8 +9,9 @@ void generateAllGames(TicTacToeBoard board)
   list<string>::iterator it;
 
   moves=board.legalMoves();
+  it=moves.begin();
 
-  for (it=moves.begin(); it != moves.end(); ++it) {
+  for (; it != moves.end(); ++it) {
     board.makeMove(*it);
     if (board.isGameOver()) {
       copy(board.playedMoves().begin(),
