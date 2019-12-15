@@ -2,41 +2,38 @@
 #include <cstdlib>
 #include <iostream>
 #include <iterator>
+#include <forward_list>
+#include <string>
 
 void generateAllGames(TicTacToeBoard board)
 {
+  forward_list<TicTacToeBoard> boards;
+  TicTacToeBoard b;
   list<string> moves;
-  list<string>::iterator it;
 
-  moves=board.legalMoves();
-  it=moves.begin();
+  boards.push_front(board);
 
-  for (; it != moves.end(); ++it) {
-    board.makeMove(*it);
-    if (board.isGameOver()) {
-      copy(board.playedMoves().begin(),
-           board.playedMoves().end(),
-           ostream_iterator<string>(cout));
-      cout << endl;
-    } else {
-      generateAllGames(board);
+  while (!boards.empty() > 0) {
+    b=boards.front();
+    moves=b.legalMoves();
+    for (list<string>::iterator it = moves.begin(); it != moves.end(); ++it){
+      b.makeMove(*it);
+      if (b.isGameOver()) {
+        copy(board.playedMoves().begin(),
+             board.playedMoves().end(),
+             ostream_iterator<string>(cout));
+        cout << endl;
+      } else {
+        boards.push_front(b);
+      }
+      b.undoLastMove();
     }
-    board.undoLastMove();
   }
 }
 
 int main() 
 {
   generateAllGames(TicTacToeBoard());
-  TicTacToeBoard t;
-  list<string> moves;
-
-  moves=t.legalMoves();
-
-  copy(moves.begin(),
-       moves.end(),
-       ostream_iterator<string>(cout));
-  cout << endl;
 
   return(EXIT_SUCCESS);
 }

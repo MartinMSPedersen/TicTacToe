@@ -142,7 +142,8 @@ bool TicTacToeBoard::makeMove(string move)
   int row;
   int col;
 
-  transform(move.begin(), move.end(), move.begin(), ::tolower); 
+  transform(move.begin(), move.end(), std::back_inserter(move), ::toupper);
+
   if (is_game_over) return false;
   row=move.at(0)-'A';
   col=move.at(1)-'1';
