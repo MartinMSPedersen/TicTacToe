@@ -12,6 +12,17 @@ class TicTacToeBoard():
                         "C1", "C2", "C3" ]
     self.playedMoves = []
 
+  def eval(self):
+    if (not self.is_game_over):
+     return None
+    if (self.winner == "X"):
+     return 1
+    if (self.winner == "O"):
+     return -1
+    if (self.winner == "-"):
+     return 0
+    raise "This should never happen" 
+
   def makeMove(self, move):
     if (self.is_game_over):
       return False
@@ -32,11 +43,6 @@ class TicTacToeBoard():
   def isGameOver(self):
     if (self.is_game_over == True):
       return True
-    if (len(self.emptyPlaces) == 0):
-      self.is_game_over == True
-      self.winner = "-"
-      return True
-
     for col in range(3):
       Xcount = 0
       Ocount = 0 
@@ -84,6 +90,11 @@ class TicTacToeBoard():
           self.is_game_over = True
           self.winner = self.board[0][2]
           return True
+
+    if (len(self.emptyPlaces) == 0):
+      self.is_game_over == True
+      self.winner = "-"
+      return True
     return False
 
   def undoLastMove(self):
