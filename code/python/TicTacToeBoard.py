@@ -13,22 +13,22 @@ class TicTacToeBoard():
     self.playedMoves = []
 
   def eval(self):
-    if (not self.is_game_over):
+    if not self.is_game_over:
      return None
-    if (self.winner == "X"):
+    if self.winner == "X":
      return 1
-    if (self.winner == "O"):
+    if self.winner == "O":
      return -1
-    if (self.winner == "-"):
+    if self.winner == "-":
      return 0
     raise "This should never happen" 
 
   def makeMove(self, move):
-    if (self.is_game_over):
+    if self.is_game_over:
       return False
     row = ord(move[0:1]) - ord('A')
     col = ord(move[1:2]) - ord('1')
-    if (self.board[row][col] != "-"):
+    if self.board[row][col] != "-":
        return False
     self.playedMoves.append(move)
     self.board[row][col] = self.whoToMove
@@ -41,21 +41,21 @@ class TicTacToeBoard():
     return self.isGameOver()
 
   def isGameOver(self):
-    if (self.is_game_over == True):
+    if self.is_game_over == True:
       return True
     for col in range(3):
       Xcount = 0
       Ocount = 0 
       for row in range(3):
-        if (self.board[row][col] == "X"):
+        if self.board[row][col] == "X":
           Xcount = Xcount + 1
-        if (self.board[row][col] == "O"):
+        if self.board[row][col] == "O":
           Ocount = Ocount + 1
-      if (Xcount == 3):
+      if Xcount == 3:
         self.is_game_over = True
         self.winner = "X"
         return True
-      if (Ocount == 3):
+      if Ocount == 3:
         self.is_game_over = True
         self.winner = "O"
         return True
@@ -64,53 +64,53 @@ class TicTacToeBoard():
       Xcount = 0
       Ocount = 0 
       for col in range(3):
-        if (self.board[row][col] == "X"):
+        if self.board[row][col] == "X":
           Xcount = Xcount + 1
-        if (self.board[row][col] == "O"):
+        if self.board[row][col] == "O":
           Ocount = Ocount + 1
-      if (Xcount == 3):
+      if Xcount == 3:
         self.is_game_over = True
         self.winner = "X"
         return True
-      if (Ocount == 3):
+      if Ocount == 3:
         self.is_game_over = True
         self.winner = "O"
         return True
        
       if (self.board[0][0] == self.board[1][1] and
           self.board[0][0] == self.board[2][2]):
-        if (self.board[0][0] != "-"):
+        if self.board[0][0] != "-":
           self.is_game_over = True
           self.winner = self.board[0][0]
           return True
 
       if (self.board[0][2] == self.board[1][1] and
           self.board[0][2] == self.board[2][0]):
-        if (self.board[0][2] != "-"):
+        if self.board[0][2] != "-":
           self.is_game_over = True
           self.winner = self.board[0][2]
           return True
 
-    if (len(self.emptyPlaces) == 0):
+    if len(self.emptyPlaces) == 0:
       self.is_game_over == True
       self.winner = "-"
       return True
     return False
 
   def undoLastMove(self):
-    if (self.lastMove == ""):
+    if self.lastMove == "":
       return
     row = ord(self.lastMove[0:1]) - ord('A')
     col = ord(self.lastMove[1:2]) - ord('1')
     self.board[row][col] = "-"
-    if (self.whoToMove == "X"):
+    if self.whoToMove == "X":
       self.whoToMove = "O"
     else:
       self.whoToMove = "X"
     self.emptyPlaces.append(self.lastMove)
     self.playedMoves.remove(self.lastMove)
     self.is_game_over = False
-    if (len(self.playedMoves) == 0): 
+    if len(self.playedMoves) == 0: 
       self.lastMove = ""
     else:
       self.lastMove = self.playedMoves[-1]
@@ -121,12 +121,12 @@ class TicTacToeBoard():
     print("C ","".join(self.board[2]))
     print()
     print("   123")
-    if (full):
+    if full:
       print()
       print("Played moves: ",self.playedMoves)
       print("Who to move: ",self.whoToMove)
       print("Is game over: ",self.is_game_over)
-      if (self.isGameOver): 
+      if self.isGameOver: 
         print("Winner: ", self.winner)
       print("Empty places: ",self.emptyPlaces)
       print()
