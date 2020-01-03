@@ -5,6 +5,7 @@
 #include <iterator>
 #include <cstring>
 #include <algorithm> 
+#include <vector>
 
 using namespace std;
 
@@ -141,8 +142,9 @@ bool TicTacToeBoard::makeMove(string move)
 {
   int row;
   int col;
+  string m;
 
-  transform(move.begin(), move.end(), std::back_inserter(move), ::toupper);
+  transform(move.begin(), move.end(), std::back_inserter(m), ::toupper);
 
   if (is_game_over) return false;
   row=move.at(0)-'A';
@@ -160,9 +162,9 @@ bool TicTacToeBoard::makeMove(string move)
   return isGameOver();
 }
 
-list<string> TicTacToeBoard::legalMoves() const
+vector<string> TicTacToeBoard::legalMoves() const
 {
-  list<string> result;
+  vector<string> result;
   list<string>::iterator it;
 
   for (auto const& it : emptyPlaces) {

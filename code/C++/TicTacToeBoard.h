@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <vector>
 
 using namespace std;
 
@@ -15,7 +16,7 @@ class TicTacToeBoard
 		bool makeMove(string move);
 		bool isGameOver();
 		void undoLastMove();
-		list<string> legalMoves() const;
+		vector<string> legalMoves() const;
 		list<string> playedMoves();
 	private:
 		char whoToMove;
