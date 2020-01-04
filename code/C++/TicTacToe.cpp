@@ -7,10 +7,10 @@
 #include <random>
 #include <vector>
 
-random_device seed;
-mt19937 engine(seed());
-
 void playARandomGame() {
+	random_device seed;
+	mt19937 engine(seed());
+
 	TicTacToeBoard t;
 	vector<string> moves;
 	
