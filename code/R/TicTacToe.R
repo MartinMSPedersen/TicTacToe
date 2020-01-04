@@ -77,8 +77,9 @@ makeAllPositions <- function(output = FALSE) {
 		}
 	}
 	placeOne(b)
-	result <- unique(result)
-	result[nchar(result) != 0]
+	#          result <- unique(result)
+	# result[nchar(result) != 0]
+        result
 }
 
 #games <- makeAllGames(T)	

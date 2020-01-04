@@ -136,6 +136,7 @@ void TicTacToeBoard::undoLastMove() {
   } else {
     lastMove=*(--_playedMoves.end());
   }
+  is_game_over=false; 
 }
 
 bool TicTacToeBoard::makeMove(string move) 

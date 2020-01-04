@@ -10,39 +10,6 @@
 random_device seed;
 mt19937 engine(seed());
 
-
-void generateAllGames(TicTacToeBoard board)
-{
-  forward_list<TicTacToeBoard> boards;
-  TicTacToeBoard b;
-  vector<string> moves;
-
-  boards.push_front(board);
-
-  while (!boards.empty() > 0) {
-    b=boards.front();
-    moves=b.legalMoves();
-    for (vector<string>::iterator it = moves.begin(); it != moves.end(); ++it){
-      b.makeMove(*it);
-      if (b.isGameOver()) {
-	for (auto const& move: b.playedMoves()) {
-		cout << move;
-	}
-	cout << endl;
-/*
-        copy(board.playedMoves().begin(),
-             board.playedMoves().end(),
-             ostream_iterator<string>(cout));
-        cout << endl;
-*/
-      } else {
-        boards.push_front(b);
-      }
-      b.undoLastMove();
-    }
-  }
-}
-
 void playARandomGame() {
 	TicTacToeBoard t;
 	vector<string> moves;
@@ -58,15 +25,25 @@ void playARandomGame() {
 	cout << endl;
 }
 
+void generateAllGames(TicTacToeBoard board)
+{
+  vector<string> moves=board.legalMoves();
+  for (vector<string>::iterator it = moves.begin(); it != moves.end(); ++it){
+    board.makeMove(*it);
+    if (board.isGameOver()) {
+      for (auto const& move: board.playedMoves()) cout << move; 
+      cout << endl;
+    } else {
+       generateAllGames(TicTacToeBoard(board));
+    }
+    board.undoLastMove();
+  }
+}
+
+
 int main() 
 {
-  while (1) {
-	  playARandomGame();
-  }
-  /* 
-    generateAllGames(TicTacToeBoard());
-  */
-
+  generateAllGames(TicTacToeBoard());
 
   return(EXIT_SUCCESS);
 }
