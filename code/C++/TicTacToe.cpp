@@ -6,6 +6,7 @@
 #include <string>
 #include <random>
 #include <vector>
+#include <algorithm> 
 
 void playARandomGame() {
 	random_device seed;
@@ -40,6 +41,35 @@ void generateAllGames(TicTacToeBoard board)
   }
 }
 
+int MinMax(TicTacToeBoard board)
+{
+	bool maxPlayer;
+	int bestValue;
+	vector<string> moves;
+
+	if (board.isGameOver()) {
+		return board.eval() ;
+	}
+	moves=board.legalMoves();
+	if (board.whoToMove() == 'X') {
+		maxPlayer=true;
+		bestValue=-1000;
+	} else {
+		maxPlayer=false;
+		bestValue=1000;
+	}
+	std::random_shuffle(moves.begin(),moves.end());
+	for (vector<string>::iterator it=moves.begin(); it!=moves.end(); ++it) {
+ 		board.makeMove(*it);
+		if (maxPlayer) {
+			bestValue=max(bestValue,MinMax(board));
+		} else {
+			bestValue=min(bestValue,MinMax(board));
+		}
+		board.undoLastMove();
+	}
+	return bestValue;
+}
 
 int main() 
 {

@@ -11,7 +11,7 @@ using namespace std;
 
 TicTacToeBoard::TicTacToeBoard()
 {
-	whoToMove = 'X';
+	_whoToMove = 'X';
 	is_game_over = false;
 	winner = ' ';
 	lastMove = ' ';
@@ -27,6 +27,15 @@ TicTacToeBoard::TicTacToeBoard()
 	emptyPlaces.push_back("C1");
 	emptyPlaces.push_back("C2");
 	emptyPlaces.push_back("C3");
+}
+
+int TicTacToeBoard::eval()
+{
+	if (isGameOver()) {
+		if (winner=='X') return  100;
+		if (winner=='O') return -100;
+	}
+	return 0;
 }
 
 ostream& operator<< (ostream& o, TicTacToeBoard& tb) 
@@ -124,10 +133,10 @@ void TicTacToeBoard::undoLastMove() {
   row=lastMove.at(0)-'A';
   col=lastMove.at(1)-'1';
   board[row][col]='-';
-  if (whoToMove=='X') {
-    whoToMove='O';
+  if (_whoToMove=='X') {
+    _whoToMove='O';
   } else {
-    whoToMove='X';
+    _whoToMove='X';
   }
   emptyPlaces.push_back(lastMove);
   _playedMoves.remove(lastMove);
@@ -152,16 +161,18 @@ bool TicTacToeBoard::makeMove(string move)
   col=move.at(1)-'1';
   if (board[row][col] != '-') return false;
   _playedMoves.push_back(move);
-  board[row][col]=whoToMove;
-  if (whoToMove == 'X') {
-    whoToMove='O';
+  board[row][col]=_whoToMove;
+  if (_whoToMove == 'X') {
+    _whoToMove='O';
   } else {
-    whoToMove='X';
+    _whoToMove='X';
   }
   emptyPlaces.remove(move);
   lastMove=move;
   return isGameOver();
 }
+
+char TicTacToeBoard::whoToMove() const { return _whoToMove; }
 
 vector<string> TicTacToeBoard::legalMoves() const
 {

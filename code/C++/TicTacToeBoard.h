@@ -18,8 +18,10 @@ class TicTacToeBoard
 		void undoLastMove();
 		vector<string> legalMoves() const;
 		list<string> playedMoves();
+		int eval();
+		char whoToMove() const;
 	private:
-		char whoToMove;
+		char _whoToMove;
 		bool is_game_over;
 		char winner;
 		string lastMove;
