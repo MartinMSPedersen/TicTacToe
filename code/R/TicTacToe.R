@@ -82,7 +82,7 @@ makeAllPositions <- function(output = FALSE) {
         result
 }
 
-#games <- makeAllGames(T)	
-positions <- makeAllPositions(F)
+games <- makeAllGames(T)	
+#positions <- makeAllPositions(F)
 
 #v <- computeValues()
