@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker container run -v $PWD:/usr/src -w /usr/src mono mcs TicTacToeBoard.cs 
+docker container run -u $(id -u):$(id -g) -v $PWD:/usr/src -w /usr/src mono mcs TicTacToeBoard.cs
 

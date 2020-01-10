@@ -5,7 +5,7 @@ namespace TicTacToe
 {	
 	class TicTacToeBoard
 	{
-		private char whoToMove;
+		private char _whoToMove;
 		private bool is_game_over;
 		private char winner;
 		private string lastMove;
@@ -15,7 +15,7 @@ namespace TicTacToe
 
 		public TicTacToeBoard()
 		{
-			whoToMove = 'X';
+			_whoToMove = 'X';
 			is_game_over = false;
 			winner = ' ';
 			lastMove = "";
@@ -23,6 +23,7 @@ namespace TicTacToe
 			for (int row=0; row<3; row++)
 				for (int col=0; col<3; col++)
 					board[row,col] = '-';
+			emptyPlaces=new List<string>();
 			emptyPlaces.Add("A1");
 			emptyPlaces.Add("A2");
 			emptyPlaces.Add("A3");
@@ -36,13 +37,58 @@ namespace TicTacToe
 
 		public override string ToString()
 		{
-			return whoToMove.ToString();
+			string result=new string("");
+		
+			result += "  123\n";
+			result += "A "; 
+			result += board[0,0];
+			result += board[0,1];
+			result += board[0,2];
+			result += " A\n";
+			result += "B "; 
+			result += board[1,0];
+			result += board[1,1];
+			result += board[1,2];
+			result += " B\n";
+			result += "C "; 
+			result += board[2,0];
+			result += board[2,1];
+			result += board[2,2];
+			result += " C\n";
+			result += "  123";
+			return result;
 		}
 
 		public void undoLastMove()
 		{
-			;
+			int row, col;
+
+			if (lastMove == " ") return;
+			row=char.Parse(lastMove.Substring(0,1))-'A';
+			col=char.Parse(lastMove.Substring(1,1))-'1';
+			board[row,col]='-';
+			if (_whoToMove == 'X') {
+				_whoToMove='O';
+			} else {
+				_whoToMove='X';
+			}
+			emptyPlaces.Add(lastMove);
+			_playedMoves.Remove(lastMove);
+			if (_playedMoves.Count == 0) {
+				lastMove=" ";
+			} else {
+				lastMove=_playedMoves[_playedMoves.Count-1];
+			}
+			is_game_over=false;
 		}
+
+		public List<string> legalMoves() 
+		{
+			List<string> result=new List<string>(emptyPlaces);
+			return result;
+		}
+			
+			
 
 	}
 
@@ -52,6 +98,7 @@ namespace TicTacToe
 		{
 			TicTacToeBoard t=new TicTacToeBoard();
 			Console.WriteLine(t);
+			t.legalMoves().ForEach(Console.WriteLine);
 		}
 	}
 }
