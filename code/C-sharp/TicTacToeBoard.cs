@@ -15,6 +15,7 @@ namespace TicTacToe
 
 		public TicTacToeBoard()
 		{
+			_playedMoves=new List<string>();
 			_whoToMove = 'X';
 			is_game_over = false;
 			winner = ' ';
@@ -33,6 +34,38 @@ namespace TicTacToe
 			emptyPlaces.Add("C1");
 			emptyPlaces.Add("C2");
 			emptyPlaces.Add("C3");
+		}
+
+		public TicTacToeBoard(TicTacToeBoard t2) {
+			_whoToMove=t2._whoToMove;
+			is_game_over=t2.is_game_over;
+			winner=t2.winner;
+			lastMove=t2.lastMove;
+			board=t2.board;
+			emptyPlaces=t2.emptyPlaces;
+			_playedMoves=t2._playedMoves;
+		}
+	
+		public bool makeMove(string move) 
+		{
+			int row;
+			int col;
+
+			if (is_game_over) return false;
+			move=move.ToUpper();
+			row=char.Parse(move.Substring(0,1))-'A';
+			col=char.Parse(move.Substring(1,1))-'1';
+			if (board[row,col] != '-') return false;
+			_playedMoves.Add(new string(move));
+			board[row,col]=_whoToMove;
+			if (_whoToMove == 'X') {
+				_whoToMove='O';
+			} else {
+				_whoToMove='X';
+			}
+			emptyPlaces.Remove(move);
+			lastMove=move;
+			return isGameOver();
 		}
 
 		public override string ToString()
@@ -58,6 +91,8 @@ namespace TicTacToe
 			result += "  123";
 			return result;
 		}
+
+		public char whoToMove() { return _whoToMove; }
 
 		public void undoLastMove()
 		{
@@ -87,18 +122,84 @@ namespace TicTacToe
 			List<string> result=new List<string>(emptyPlaces);
 			return result;
 		}
-			
-			
 
-	}
-
-	class Program
-	{
-		static void Main(string[] args)
+		public List<string> playedMoves()
 		{
-			TicTacToeBoard t=new TicTacToeBoard();
-			Console.WriteLine(t);
-			t.legalMoves().ForEach(Console.WriteLine);
+			return _playedMoves;
+		}
+
+		public int eval()
+		{
+			if (isGameOver()) {
+				if (winner == 'X') return  100;
+				if (winner == 'O') return -100;
+			}
+			return 0;
+		}
+
+		public bool isGameOver()
+		{
+			int Xcount;
+			int Ocount;
+
+			if (is_game_over) return true;
+			if (emptyPlaces.Count == 0) {
+				is_game_over=true;
+				winner=' ';
+				return true;
+			}
+			for (int col=0; col<3; col++) {
+				Xcount=0;
+				Ocount=0;
+				for (int row=0; row<3; row++) {
+					if (board[row,col] == 'X') Xcount++;
+					if (board[row,col] == 'O') Ocount++;
+				}
+				if (Xcount == 3) {
+					is_game_over=true;
+					winner = 'X';
+					return true;
+				}
+				if (Ocount == 3) {
+					is_game_over=true;
+					winner = 'O';
+					return true;
+				}
+			}
+			for (int row=0; row<3; row++) {
+				Xcount=0;
+				Ocount=0;
+				for (int col=0; col<3; col++) {
+					if (board[row,col] == 'X') Xcount++;
+					if (board[row,col] == 'O') Ocount++;
+				}
+				if (Xcount == 3) {
+					is_game_over=true;
+					winner = 'X';
+					return true;
+				}
+				if (Ocount == 3) {
+					is_game_over=true;
+					winner = 'O';
+					return true;
+				}
+			}
+			if (board[0,0] == board[1,1] &&
+			    board[0,0] == board[2,2] &&
+			    board[0,0] != '-') {
+			  is_game_over=true;
+			  winner=board[0,0];
+			  return true;
+			}
+			if (board[0,2] == board[1,1] &&
+			    board[0,2] == board[2,0] &&
+			    board[0,2] != '-') {
+			  is_game_over=true;
+			  winner=board[0,2];
+			  return true;
+			}
+			return false;
 		}
 	}
+
 }
