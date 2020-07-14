@@ -2,16 +2,15 @@
 require("TicTacToeBoard.php");
 
 function generateAllGames($board) {
-	foreach ($board->emptyPlaces as $move) {
+	foreach ($board->get_emptyPlaces() as $move) {
 		$board->makeMove($move);
 		if ($board->isGameOver() == true) {
-			echo "<pre>";
-			foreach ($board->playedMoves as $move) {
+			$count++;
+			foreach ($board->get_playedMoves() as $move) {
 				echo $move;
 			}
 			echo "\n";
 			$board->toText();
-			echo "</pre>";
 		} else {
 			generateAllGames($board);
 		}
@@ -19,7 +18,13 @@ function generateAllGames($board) {
 	}
 }
 
+$count=0;
 $a_board = new TicTacToeBoard;
+echo "<pre>";
 generateAllGames($a_board);
+echo "/<pre>";
+echo "<H1>";
+echo $count;
+echo "</H1>";
 
 ?>

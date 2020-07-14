@@ -7,14 +7,13 @@ class TicTacToeBoard {
 	private $winner;
 	private $lastMove;
 	private $board;
-	public $emptyPlaces;
-	public $playedMoves;
+	private $emptyPlaces;
+	private $playedMoves;
 
-	
 	function __construct() {
 		$this->whoToMove = "X";
 		$this->is_game_over = false;
-		$this->winner = "";
+		$this->winner = "NOT FINISH";
 		$this->lastMove = "";
 		$this->board = array(
 			array("-","-","-"),
@@ -25,8 +24,24 @@ class TicTacToeBoard {
 		$this->playedMoved = [];
 	}
 
+  function get_winner() {
+		return $this->winner;
+	}
+
 	function toHTML() {
 		;
+	}
+
+	function get_emptyPlaces() {
+		return $this->emptyPlaces;
+	}
+
+	function get_lastMove() {
+		return $this->lastMove;
+	}
+
+	function get_playedMoves() {
+		return $this->playedMoves;
 	}
 
   function makeMove($move) {
@@ -118,7 +133,7 @@ class TicTacToeBoard {
 
     $row = ord(substr($this->lastMove,0,1))-ord('A');
     $col = ord(substr($this->lastMove,1,1))-ord('1');
-		$this->board[row][col] = "-";
+		$this->board[$row][$col] = "-";
 
 		if ($this->whoToMove == "X") {
 			$this->whoToMove = "O";
@@ -135,7 +150,7 @@ class TicTacToeBoard {
 		reset($this->playedMoves);
 	}
 
-	function toText() {
+	function toText($full = false) {
 		$result="";
 		$result = $result . "A ";
 		foreach ($this->board[0] as $piece) {
@@ -154,7 +169,7 @@ class TicTacToeBoard {
 		$result = $result . "\n";
 		$result = $result . "  123";
 		$result = $result . "\n";
-		echo $result;
+		return $result;
 		/*
     if full:
       print()
