@@ -131,3 +131,6 @@ class TicTacToeBoard():
       print("Empty places: ",self.emptyPlaces)
       print()
 # end of class TicTacTocBoard
+
+if __name__ == '__main__':
+	True

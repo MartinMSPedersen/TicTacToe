@@ -72,9 +72,9 @@ class TicTacToeBoard {
 			$Xcount = 0;
 			$Ocount = 0;
 			for ($row = 0; $row < 3; $row++) {
-				if ($this->board[row][col] == "X")
+				if ($this->board[$row][$col] == "X")
 					$Xcount++;
-				if ($this->board[row][col] == "O")
+				if ($this->board[$row][$col] == "O")
 					$Ocount++;
 			}
       if ($Xcount == 3) {
@@ -93,9 +93,9 @@ class TicTacToeBoard {
 			$Xcount = 0;
 			$Ocount = 0;
 			for ($col = 0; $col < 3; $col++) {
-				if ($this->board[row][col] == "X")
+				if ($this->board[$row][$col] == "X")
 					$Xcount++;
-				if ($this->board[row][col] == "O")
+				if ($this->board[$row][$col] == "O")
 					$Ocount++;
 			}
       if ($Xcount == 3) {

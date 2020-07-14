@@ -2,6 +2,7 @@
 require("TicTacToeBoard.php");
 
 function generateAllGames($board) {
+	global $count;
 	foreach ($board->get_emptyPlaces() as $move) {
 		$board->makeMove($move);
 		if ($board->isGameOver() == true) {
@@ -22,7 +23,7 @@ $count=0;
 $a_board = new TicTacToeBoard;
 echo "<pre>";
 generateAllGames($a_board);
-echo "/<pre>";
+echo "</pre>";
 echo "<H1>";
 echo $count;
 echo "</H1>";
