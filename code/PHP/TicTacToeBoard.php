@@ -24,7 +24,7 @@ class TicTacToeBoard {
 		$this->playedMoved = [];
 	}
 
-  function get_winner() {
+	function get_winner() {
 		return $this->winner;
 	}
 
@@ -44,12 +44,12 @@ class TicTacToeBoard {
 		return $this->playedMoves;
 	}
 
-  function makeMove($move) {
+	function makeMove($move) {
 		if ($this->is_game_over == true) return;
 
 		$move=strtoupper($move);
-    $row = ord(substr($move,0,1))-ord('A');
-    $col = ord(substr($move,1,1))-ord('1');
+		$row = ord(substr($move,0,1))-ord('A');
+		$col = ord(substr($move,1,1))-ord('1');
 
 		if ($this->board[$row][$col] != '-') return;
 		$this->board[$row][$col] = $this->whoToMove;
@@ -77,12 +77,12 @@ class TicTacToeBoard {
 				if ($this->board[$row][$col] == "O")
 					$Ocount++;
 			}
-      if ($Xcount == 3) {
+			if ($Xcount == 3) {
 				$this->is_game_over = true;
 				$this->winner = "X";
 				return true;
 			}
-      if ($Ocount == 3) {
+			if ($Ocount == 3) {
 				$this->is_game_over = true;
 				$this->winner = "O";
 				return true;
@@ -98,12 +98,12 @@ class TicTacToeBoard {
 				if ($this->board[$row][$col] == "O")
 					$Ocount++;
 			}
-      if ($Xcount == 3) {
+			if ($Xcount == 3) {
 				$this->is_game_over = true;
 				$this->winner = "X";
 				return true;
 			}
-      if ($Ocount == 3) {
+			if ($Ocount == 3) {
 				$this->is_game_over = true;
 				$this->winner = "O";
 				return true;
@@ -131,8 +131,8 @@ class TicTacToeBoard {
 	function undoLastMove() {
 		if ($this->lastMove == "") return;
 
-    $row = ord(substr($this->lastMove,0,1))-ord('A');
-    $col = ord(substr($this->lastMove,1,1))-ord('1');
+		$row = ord(substr($this->lastMove,0,1))-ord('A');
+		$col = ord(substr($this->lastMove,1,1))-ord('1');
 		$this->board[$row][$col] = "-";
 
 		if ($this->whoToMove == "X") {
@@ -150,7 +150,7 @@ class TicTacToeBoard {
 		reset($this->playedMoves);
 	}
 
-	function toText($full = false) {
+	function toText() {
 		$result="";
 		$result = $result . "A ";
 		foreach ($this->board[0] as $piece) {
@@ -170,17 +170,6 @@ class TicTacToeBoard {
 		$result = $result . "  123";
 		$result = $result . "\n";
 		return $result;
-		/*
-    if full:
-      print()
-      print("Played moves: ",self.playedMoves)
-      print("Who to move: ",self.whoToMove)
-      print("Is game over: ",self.is_game_over)
-      if self.isGameOver: 
-        print("Winner: ", self.winner)
-      print("Empty places: ",self.emptyPlaces)
-      print()
-		*/
 	}
 }
 
