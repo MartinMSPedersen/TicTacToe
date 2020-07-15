@@ -29,169 +29,156 @@ TicTacToeBoard::TicTacToeBoard()
 	emptyPlaces.push_back("C3");
 }
 
-int TicTacToeBoard::eval()
-{
-	if (isGameOver()) {
-		if (winner=='X') return  100;
-		if (winner=='O') return -100;
-	}
-	return 0;
-}
-
 ostream& operator<< (ostream& o, TicTacToeBoard& tb) 
 {
 	string result;
 
-        result+="  123\n";
-        result+="A ";
+	result+="  123\n";
+	result+="A ";
 	result+=tb.board[0][0];
 	result+=tb.board[0][1];
 	result+=tb.board[0][2];
 	result+=" A";
-        result+="\nB ";
+	result+="\nB ";
 	result+=tb.board[1][0];
 	result+=tb.board[1][1];
 	result+=tb.board[1][2];
 	result+=" B";
-        result+="\nC ";
+	result+="\nC ";
 	result+=tb.board[2][0];
 	result+=tb.board[2][1];
 	result+=tb.board[2][2];
 	result+=" C";
-        result+="\n  123";
+	result+="\n  123";
 	return o << result;
 }
 
 bool TicTacToeBoard::isGameOver() 
 {
-  unsigned char Xcount;
-  unsigned char Ocount;
+	unsigned char Xcount;
+	unsigned char Ocount;
 
-  if (is_game_over) return true;
-  if (emptyPlaces.size() == 0) {
-    is_game_over=true;
-    winner='-';
-    return true;
-  }
-  for (unsigned char col=0; col<3; col++) {
-    Xcount=0;
-    Ocount=0;
-    for (unsigned char row=0; row<3; row++) {
-      if (board[row][col] == 'X') Xcount++;
-      if (board[row][col] == 'O') Ocount++;
-    }
-    if (Xcount == 3) {
-      is_game_over=true;
-      winner='X';
-      return true;
-    }
-    if (Ocount == 3) {
-      is_game_over=true;
-      winner='O';
-      return true;
-    }
-  }
-  for (unsigned char row=0; row<3; row++) {
-    Xcount=0;
-    Ocount=0;
-    for (unsigned char col=0; col<3; col++) {
-      if (board[row][col] == 'X') Xcount++;
-      if (board[row][col] == 'O') Ocount++;
-    }
-    if (Xcount == 3) {
-      is_game_over=true;
-      winner='X';
-      return true;
-    }
-    if (Ocount == 3) {
-      is_game_over=true;
-      winner='O';
-      return true;
-    }
-  }
-  if (board[0][0] == board[1][1] &&
-      board[0][0] == board[2][2] &&
-      board[0][0] != '-') {
-    is_game_over=true;
-    winner=board[0][0];
-    return true;
-  }
-  if (board[0][2] == board[1][1] &&
-      board[0][2] == board[2][0] &&
-      board[0][2] != '-') {
-    is_game_over=true;
-    winner=board[0][2];
-    return true;
-  }
-  return false;
+	if (is_game_over) return true;
+	if (emptyPlaces.size() == 0) {
+		is_game_over=true;
+		winner='-';
+		return true;
+	}
+	for (unsigned char col=0; col<3; col++) {
+		Xcount=0;
+		Ocount=0;
+		for (unsigned char row=0; row<3; row++) {
+			if (board[row][col] == 'X') Xcount++;
+			if (board[row][col] == 'O') Ocount++;
+		}
+		if (Xcount == 3) {
+			is_game_over=true;
+			winner='X';
+			return true;
+		}
+		if (Ocount == 3) {
+			is_game_over=true;
+			winner='O';
+			return true;
+		}
+	}
+	for (unsigned char row=0; row<3; row++) {
+		Xcount=0;
+		Ocount=0;
+		for (unsigned char col=0; col<3; col++) {
+			if (board[row][col] == 'X') Xcount++;
+			if (board[row][col] == 'O') Ocount++;
+		}
+		if (Xcount == 3) {
+			is_game_over=true;
+			winner='X';
+			return true;
+		}
+		if (Ocount == 3) {
+			is_game_over=true;
+			winner='O';
+			return true;
+		}
+	}
+	if (board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != '-') {
+		is_game_over=true;
+		winner=board[0][0];
+		return true;
+	}
+	if (board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] != '-') {
+		is_game_over=true;
+		winner=board[0][2];
+		return true;
+	}
+	return false;
 }
 
 void TicTacToeBoard::undoLastMove() {
-  int row,col;
+	int row,col;
 
-  if (lastMove == " ") return;
-  row=lastMove.at(0)-'A';
-  col=lastMove.at(1)-'1';
-  board[row][col]='-';
-  if (_whoToMove=='X') {
-    _whoToMove='O';
-  } else {
-    _whoToMove='X';
-  }
-  emptyPlaces.push_back(lastMove);
-  _playedMoves.remove(lastMove);
-  if (_playedMoves.size()==0) {
-    lastMove=' ';
-  } else {
-    lastMove=*(--_playedMoves.end());
-  }
-  is_game_over=false; 
+	if (lastMove == " ") return;
+	row=lastMove.at(0)-'A';
+	col=lastMove.at(1)-'1';
+	board[row][col]='-';
+	if (_whoToMove=='X') {
+		_whoToMove='O';
+	} else {
+		_whoToMove='X';
+	}
+	emptyPlaces.push_back(lastMove);
+	_playedMoves.remove(lastMove);
+	if (_playedMoves.size()==0) {
+		lastMove=' ';
+	} else {
+		lastMove=*(--_playedMoves.end());
+	}
+	is_game_over=false; 
 }
 
 bool TicTacToeBoard::makeMove(string move) 
 {
-  int row;
-  int col;
-  string m;
+	int row;
+	int col;
+	string m;
 
-  transform(move.begin(), move.end(), std::back_inserter(m), ::toupper);
+	transform(move.begin(), move.end(), std::back_inserter(m), ::toupper);
 
-  if (is_game_over) return false;
-  row=move.at(0)-'A';
-  col=move.at(1)-'1';
-  if (board[row][col] != '-') return false;
-  _playedMoves.push_back(move);
-  board[row][col]=_whoToMove;
-  if (_whoToMove == 'X') {
-    _whoToMove='O';
-  } else {
-    _whoToMove='X';
-  }
-  emptyPlaces.remove(move);
-  lastMove=move;
-  return isGameOver();
+	if (is_game_over) return false;
+	row=move.at(0)-'A';
+	col=move.at(1)-'1';
+	if (board[row][col] != '-') return false;
+	_playedMoves.push_back(move);
+	board[row][col]=_whoToMove;
+	if (_whoToMove == 'X') {
+		_whoToMove='O';
+	} else {
+		_whoToMove='X';
+	}
+	emptyPlaces.remove(move);
+	lastMove=move;
+	return isGameOver();
 }
 
 char TicTacToeBoard::whoToMove() const { return _whoToMove; }
 
 vector<string> TicTacToeBoard::legalMoves() const
 {
-  vector<string> result;
-  list<string>::iterator it;
+	vector<string> result;
+	list<string>::iterator it;
 
-  for (auto const& it : emptyPlaces) {
-    result.push_back(it);
-  }
-  return result;
+	for (auto const& it : emptyPlaces) {
+		result.push_back(it);
+	}
+	return result;
 }
 
 list<string> TicTacToeBoard::playedMoves()
 {
-  list<string> result;
-  list<string>::iterator it;
+	list<string> result;
+	list<string>::iterator it;
 
-  for (auto const& it : _playedMoves) {
-    result.push_back(it);
-  }
-  return result;
+	for (auto const& it : _playedMoves) {
+		result.push_back(it);
+	}
+	return result;
 }
