@@ -11,4 +11,5 @@ def generateAllGames(board):
       generateAllGames(board)
     board.undoLastMove()
 
-generateAllGames(TicTacToeBoard())
+if __name__ == '__main__':
+	generateAllGames(TicTacToeBoard())
