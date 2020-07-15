@@ -138,21 +138,3 @@ playRandomGames <- function(num = 1) {
     b$moves
   })
 }
-
-unittest <- function() {
-  b <- TicTacToeBoard()
-  print("EMPTY TEST:")
-  print(b, full = T)
-  cat("\n")
-  b <- makeMove(b,"B3")
-  b <- makeMove(b,"A3")
-  print("B3 TEST:")
-  print(b, full = T)
-  cat("\n")
-  b <- undoMove(b, "B3")
-  print("UNDO TEST:")
-  print(b, full = T)
-  cat("\n")
-}
-
-
