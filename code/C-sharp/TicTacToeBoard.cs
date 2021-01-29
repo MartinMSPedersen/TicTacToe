@@ -56,7 +56,8 @@ namespace TicTacToe
 			row=char.Parse(move.Substring(0,1))-'A';
 			col=char.Parse(move.Substring(1,1))-'1';
 			if (board[row,col] != '-') return false;
-			_playedMoves.Add(new string(move));
+			//_playedMoves.Add(new string(move));
+			_playedMoves.Add(move);
 			board[row,col]=_whoToMove;
 			if (_whoToMove == 'X') {
 				_whoToMove='O';
@@ -70,7 +71,7 @@ namespace TicTacToe
 
 		public override string ToString()
 		{
-			string result=new string("");
+			string result="";
 		
 			result += "  123\n";
 			result += "A "; 
