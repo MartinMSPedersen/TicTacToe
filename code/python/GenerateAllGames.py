@@ -6,7 +6,9 @@ def generateAllGames(board):
   for move in list(board.emptyPlaces):
     board.makeMove(move)
     if board.isGameOver() == True:
-      print(board.playedMoves)
+      for move in board.playedMoves:
+        print(move, end="")
+      print()
     else:
       generateAllGames(board)
     board.undoLastMove()
