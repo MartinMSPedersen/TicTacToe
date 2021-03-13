@@ -21,11 +21,5 @@ function generateAllGames($board) {
 
 $count=0;
 $a_board = new TicTacToeBoard;
-echo "<pre>";
 generateAllGames($a_board);
-echo "</pre>";
-echo "<H1>";
-echo $count;
-echo "</H1>";
-
 ?>
