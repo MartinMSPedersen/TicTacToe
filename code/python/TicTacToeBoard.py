@@ -45,36 +45,35 @@ class TicTacToeBoard():
         for col in range(3):
             Xcount = 0
             Ocount = 0
-        for row in range(3):
-            if self.board[row][col] == 'X':
-                Xcount = Xcount + 1
-            elif self.board[row][col] == 'O':
-                Ocount = Ocount + 1
-            if Xcount == 3:
-                self.is_game_over = True
-                self.winner = 'X'
-                return True
-            elif Ocount == 3:
-                self.is_game_over = True
-                self.winner = 'O'
-                return True
+            for row in range(3):
+                if self.board[row][col] == "X":
+                    Xcount = Xcount + 1
+                if self.board[row][col] == "O":
+                    Ocount = Ocount + 1
+                if Xcount == 3:
+                    self.is_game_over = True
+                    self.winner = "X"
+                    return True
+                if Ocount == 3:
+                    self.is_game_over = True
+                    self.winner = "O"
+                    return True
         for row in range(3):
             Xcount = 0
             Ocount = 0
-        for col in range(3):
-            if self.board[row][col] == 'X':
-                Xcount = Xcount + 1
-            elif self.board[row][col] == 'O':
-                Ocount = Ocount + 1
-            if Xcount == 3:
-                self.is_game_over = True
-                self.winner = 'X'
-                return True
-            elif Ocount == 3:
-                self.is_game_over = True
-                self.winner = 'O'
-                return True
-
+            for col in range(3):
+                if self.board[row][col] == "X":
+                    Xcount = Xcount + 1
+                if self.board[row][col] == "O":
+                    Ocount = Ocount + 1
+                if Xcount == 3:
+                    self.is_game_over = True
+                    self.winner = "X"
+                    return True
+                if Ocount == 3:
+                    self.is_game_over = True
+                    self.winner = "O"
+                    return True
         if (self.board[0][0] == self.board[1][1] and self.board[0][0] == self.board[2][2]) and self.board[0][0] != '-':
             self.is_game_over = True
             self.winner = self.board[0][0]
