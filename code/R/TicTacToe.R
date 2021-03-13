@@ -10,7 +10,7 @@ makeAllGames <- function(output = FALSE) {
 			b <- makeMove(b, move)
 			if (b$isGameOver) {
 				if (output) {
-					cat(paste0(b$moves, collapse = ""),"\n")
+					cat(paste0(b$moves, collapse = ""),sep="","\n")
 				}
 				result[idx] <<- paste0(b$moves, collapse = "")
 				idx <<- idx + 1
