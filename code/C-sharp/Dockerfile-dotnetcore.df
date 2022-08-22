@@ -1,7 +1,0 @@
-FROM microsoft/aspnetcore-build
-RUN mkdir /.dotnet
-WORKDIR /app
-RUN dotnet new console
-RUN rm Program.cs
-COPY *cs /app/
-RUN dotnet build .
