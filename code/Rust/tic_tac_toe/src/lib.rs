@@ -18,6 +18,18 @@ pub struct TicTacToeBoard {
 }
 
 impl TicTacToeBoard {
+	pub fn new() -> TicTacToeBoard {
+		TicTacToeBoard {
+			is_game_over: false,
+			winner: ' ',
+			last_move: String::new(),
+			_who_to_move: 'X',
+			board: ' ',
+			empty_places: ' ',
+			_played_moves: Vec::new()
+		}
+	}
+
     pub fn make_move(&mut self, the_move: String) -> bool {
 		true
     }
