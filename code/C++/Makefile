@@ -1,14 +1,12 @@
 CXXFLAGS = -std=c++11 -Wunused -Wcast-qual -Wconversion -Woverloaded-virtual  -Werror -finline-functions -ggdb 
 CC = g++ 
-OBJS = TicTacToe.o TicTacToeBoard.o 
 EXECUTABLES = TicTacToe
+OBJS = TicTacToeBoard.cpp TicTacToe.cpp
+
 
 TicTacToe: $(OBJS)
-	$(CC) -o $@ $(OBJS)
-
-.c.o:
-	$(CC) -c $<
+	$(CC) -o $@ $(OBJS) && strip $@
 
 clean:
-	rm -f $(EXECUTABLES) $(OBJS) core
+	rm -f $(EXECUTABLES)
 
