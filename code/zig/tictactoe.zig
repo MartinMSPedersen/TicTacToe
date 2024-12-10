@@ -9,23 +9,6 @@ const TicTacToeBoard = struct {
     moves: std.ArrayList([2]u8),
 };
 
-//pub fn initTicTacToeBoard(allocator: *std.mem.Allocator) !TicTacToeBoard {
-//    var board: TicTacToeBoard = TicTacToeBoard{
-//        .whoToMove = "X",
-//        .isGameOver = false,
-//        .winner = null,
-//        .board = "---------",
-//        .legalMoves = [][2]u8{ "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3" } **null**,
-//        .moves = std.ArrayList([2]u8).init(allocator),
-//    };
-//    return board;
-//}
-
-//pub fn makeMove(board: *TicTacToeBoard, move: [2]u8) !void {
-//    // Implementation of making a move, modifying the board struct in place
-//
-//}
-
 pub fn isGameOver(board: *TicTacToeBoard) void {
     // Check rows and columns
     for (std.math.range(0, 3)) |row| {
@@ -42,14 +25,6 @@ pub fn isGameOver(board: *TicTacToeBoard) void {
         }
     }
 
-    // Check diagonals
-    //if ((board.board[0] == board.board[4] and board.board[4] == board.board[8]) or (board.board[2] == board.board[4] and board.board[4] == board.board[6])) and (board.board[4] != '-') {
-    //    board.isGameOver = true;
-    //    board.winner = board.board[4];
-    //    return;
-    //}
-
-    // Check for a draw
     var isDraw = true;
     for (board.board) |cell| {
         if (cell == '-') {
@@ -64,7 +39,4 @@ pub fn isGameOver(board: *TicTacToeBoard) void {
     }
 }
 
-pub fn main() !void {
-    //var board = try initTicTacToeBoard(allocator);
-    // Use board, make moves, check for game over, etc.
-}
+pub fn main() !void {}
