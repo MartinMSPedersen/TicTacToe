@@ -18,7 +18,7 @@ $(OUTPUT_BINARY): $(FSHARP_SCRIPT)
 	@echo "Copying script content to the project..."
 	cp $(FSHARP_SCRIPT) $(DOTNET_PROJECT_DIR)/Program.fs
 	@echo "Publishing as self-contained application..."
-	cd $(DOTNET_PROJECT_DIR) && dotnet publish -c Release -r linux-x64 --self-contained
+	cd $(DOTNET_PROJECT_DIR) && dotnet publish -c Release -r linux-x64 --self-contained -p:NoWarn=NETSDK1188
 	@echo "Output binary can be found in $(PUBLISH_DIR)"
 
 # Clean generated files
